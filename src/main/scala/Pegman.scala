@@ -16,7 +16,7 @@ object Pegman {
     var counter = 0
     for (row <- 0 until height) {
       for (col <- 0 until length) {
-        val currentCell = new Cell(grid(counter), col, row)
+        val currentCell = Cell(grid(counter), col, row)
         print(currentCell.label)
         if ("^v<>".contains(currentCell.label)) {
           cellsByCol.addBinding(col, currentCell)
@@ -28,18 +28,18 @@ object Pegman {
       println("")
     }
 
-    def pointsUpToCell(col: Int, row: Int): Boolean = cellsByCol.get(col).get.exists(_.y < row)
+    def pointsUpToCell(col: Int, row: Int) = cellsByCol.get(col).get.exists(_.y < row)
 
-    def pointsDownToCell(col: Int, row: Int): Boolean = cellsByCol.get(col).get.exists(_.y > row)
+    def pointsDownToCell(col: Int, row: Int) = cellsByCol.get(col).get.exists(_.y > row)
 
-    def pointsRighToCell(col: Int, row: Int): Boolean = cellsByRow.get(row).get.exists(_.x > col)
+    def pointsRighToCell(col: Int, row: Int) = cellsByRow.get(row).get.exists(_.x > col)
 
-    def pointsLeftToCell(col: Int, row: Int): Boolean = cellsByRow.get(row).get.exists(_.x < col)
+    def pointsLeftToCell(col: Int, row: Int) = cellsByRow.get(row).get.exists(_.x < col)
 
     def canPointToOther(x: Int, y: Int) =
       pointsUpToCell(x, y) || pointsDownToCell(x, y) || pointsRighToCell(x, y) || pointsLeftToCell(x, y)
 
-    def searchPosibleChanges(x: Int, y: Int): Int =
+    def searchPosibleChanges(x: Int, y: Int) =
       if (canPointToOther(x, y))
         1
       else
