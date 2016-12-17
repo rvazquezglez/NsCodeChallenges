@@ -28,13 +28,13 @@ object Pegman {
       println("")
     }
 
-    def pointsUpToCell(col: Int, row: Int) = cellsByCol.get(col).get.exists(_.y < row)
+    def pointsUpToCell(col: Int, row: Int) = cellsByCol(col).exists(_.y < row)
 
-    def pointsDownToCell(col: Int, row: Int) = cellsByCol.get(col).get.exists(_.y > row)
+    def pointsDownToCell(col: Int, row: Int) = cellsByCol(col).exists(_.y > row)
 
-    def pointsRighToCell(col: Int, row: Int) = cellsByRow.get(row).get.exists(_.x > col)
+    def pointsRighToCell(col: Int, row: Int) = cellsByRow(row).exists(_.x > col)
 
-    def pointsLeftToCell(col: Int, row: Int) = cellsByRow.get(row).get.exists(_.x < col)
+    def pointsLeftToCell(col: Int, row: Int) = cellsByRow(row).exists(_.x < col)
 
     def canPointToOther(x: Int, y: Int) =
       pointsUpToCell(x, y) || pointsDownToCell(x, y) || pointsRighToCell(x, y) || pointsLeftToCell(x, y)
@@ -54,7 +54,7 @@ object Pegman {
         case Cell(_, x, y) => searchPosibleChanges(x, y)
       }).sum
 
-      s"${minMov}"
+      s"$minMov"
     } catch {
       case e: Exception => "IMPOSSIBRU!!"
     }
